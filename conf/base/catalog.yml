@@ -1,0 +1,209 @@
+# RECUPERADO
+
+
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://kedro.readthedocs.io/en/stable/data/data_catalog.html
+#
+# We support interacting with a variety of data stores including local file systems, cloud, network and HDFS
+#
+# An example data set definition can look as follows:
+#
+#bikes:
+#  type: pandas.CSVDataSet
+#  filepath: "data/01_raw/bikes.csv"
+#
+#weather:
+#  type: spark.SparkDataSet
+#  filepath: s3a://your_bucket/data/01_raw/weather*
+#  file_format: csv
+#  credentials: dev_s3
+#  load_args:
+#    header: True
+#    inferSchema: True
+#  save_args:
+#    sep: '|'
+#    header: True
+#
+#scooters:
+#  type: pandas.SQLTableDataSet
+#  credentials: scooters_credentials
+#  table_name: scooters
+#  load_args:
+#    index_col: ['name']
+#    columns: ['name', 'gear']
+#  save_args:
+#    if_exists: 'replace'
+#    # if_exists: 'fail'
+#    # if_exists: 'append'
+#
+# The Data Catalog supports being able to reference the same file using two different DataSet implementations
+# (transcoding), templating and a way to reuse arguments that are frequently repeated. See more here:
+# https://kedro.readthedocs.io/en/stable/data/data_catalog.html
+#
+# This is a data set used by the "Hello World" example pipeline provided with the project
+# template. Please feel free to remove it once you remove the example pipeline.
+
+
+
+# ### EDITED SAMUEL
+bank_raw_data:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/Bank Marketing.csv
+  load_args:
+
+bank_daily_data:
+  type: pandas.CSVDataSet
+  filepath: data/01_daily_data/dailydata.csv
+  load_args:
+
+raw_describe:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: json.JSONDataSet
+    filepath: data/08_reporting/describe_data_raw.json
+
+cleaned_describe:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: json.JSONDataSet
+    filepath: data/08_reporting/describe_data_cleaned.json
+
+
+
+bank_cleaned_data:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/bank_full_cleaned.csv
+
+
+bank_data_engineered:
+  type: pandas.CSVDataSet
+  filepath: data/04_feature/bank_marketing_engineered.csv
+#  filepath: data/04_feature/bank_full_engineered.csv
+
+bank_daily_data_engineered:
+  type: pandas.CSVDataSet
+  filepath: data/04_feature/daily_bank_marketing_engineered.csv
+
+
+
+X_train_data:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/X_train.csv
+
+y_train_data:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/y_train.csv
+
+
+X_test_data:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/X_test.csv
+
+y_test_data:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/y_test.csv
+
+
+
+daily_prediction:
+  type: pandas.CSVDataSet
+  filepath: data/07_model_output/y_test.csv
+  versioned: True
+
+
+champion_daily_prediction:
+  type: pandas.CSVDataSet
+  filepath: data/07_model_output/y_test_champion.csv
+  versioned: True
+
+
+challenger_daily_prediction:
+  type: pandas.CSVDataSet
+  filepath: data/07_model_output/y_test_challenger.csv
+  versioned: True
+
+
+
+drift_result:
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/drift_result.csv
+
+
+best_columns: 
+  type: pickle.PickleDataSet
+  filepath: data/06_models/best_cols.pkl
+  backend: pickle
+
+
+
+
+test_model:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pickle.PickleDataSet
+    filepath: data/06_models/trained_model.pkl
+    backend: pickle
+
+output_plot:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/shap_plot.png
+
+
+
+
+
+champion_model:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pickle.PickleDataSet
+    filepath: data/06_models/champion_trained_model.pkl
+    backend: pickle
+
+champion_output_plot:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/champion_shap_plot.png
+
+
+challenger_model:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: pickle.PickleDataSet
+    filepath: data/06_models/challenger_trained_model.pkl
+    backend: pickle
+
+challenger_output_plot:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/challenger_shap_plot.png
+
+
+
+champion_classification_report:
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/champion_classification_report.csv
+
+
+challenger_classification_report:
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/challenger_classification_report.csv
+
+
+
+champion_feature_importance:
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/champion_feature_importance.csv
+
+

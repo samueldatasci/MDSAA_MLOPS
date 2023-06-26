@@ -1,0 +1,12 @@
+test_fraction: 0.2 # was: 0.3
+random_state: 2021
+target_column: "subscription"
+n_estimators: 100
+max_depth: 6
+max_features: 3
+run_name: "default"
+run_name_champion: "Champion"
+run_name_challenger: "Challenger"
+feature_selection: "rfe"
+model_name: "bank"
+with_feature_selection: True # was: True

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Samuel%20Santos/Documents/MDSAA-DS/MLOPS/GitHub/MLOPS/mlflow_project/ml_artifacts/841056954874396748/a1d5ef6f42c046269305494124393037/artifacts
+end_time: 1687771670488
+entry_point_name: ''
+experiment_id: '841056954874396748'
+lifecycle_stage: active
+run_id: a1d5ef6f42c046269305494124393037
+run_name: default
+run_uuid: a1d5ef6f42c046269305494124393037
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1687771557374
+status: 3
+tags: []
+user_id: Samuel Santos
